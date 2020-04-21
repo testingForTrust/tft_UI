@@ -1,0 +1,64 @@
+<div [@dialog] *ngIf="visible" class="dialog adversarialsetting-bg">
+    <div class="adversarialsetting-wrap">
+      <div class="adversarialsetting-header">Settings</div>
+      <form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+      <div class="adversarialsetting-cont-wrap">
+        <div class="adversarialsetting-option-wrap form-group">
+          <label for="" class="tooltip">Threshold <i class="fa fa-info-circle"></i>
+            <span class="tooltiptext">
+            By default 0.1.  [a float value between 0 and 1. If the difference between the % of original examples correctly classified and % of adversarial examples correctly classified is greater than threshold, the metric of adversarial examples will be highlighted in red color to indicate the model does not meet desired robustness]
+            </span>
+          </label>
+          <input disabled type="text" name="threshold" [(ngModel)]="model.threshold" #threshold="ngModel" (ngModelChange)="thresholdValueChange($event)" class="form-control">
+        </div>
+        <div class="clearfix"></div>
+        <!-- <div class="adversarialsetting-option-wrap form-group">
+          <label for="" class="tooltip">Method <i class="fa fa-info-circle"></i>
+            <span class="tooltiptext">
+            Select the method to be used to generate Adversarial examples. Currently supported methods are Fast Gradient Sign Method(FGSM) and Jacobian-based Saliency Map Approach(JSMA). By default FGSM will be used.
+            </span>
+          </label>
+          <select disabled name="method" [(ngModel)]="model.method" #method="ngModel" (change)="methodSelect($event)">
+            <option value="fgsm">FGSM</option>
+            <option value="jsma">JSMA</option>
+          </select>
+        </div> -->
+        <div class="adversarialsetting-option-wrap methodoption-subsetting form-group" *ngIf="displayFGSMOptions">
+          <label for="" class="tooltip">Epsilon <i class="fa fa-info-circle"></i>
+            <span class="tooltiptext">
+              Input variation parameter. By default 0.1. [A float – between 0 and 1]
+            </span>
+          </label>
+          <input disabled type="text" name="eps" [(ngModel)]="model.eps" #eps="ngModel" (ngModelChange)="epsilonValueChange($event)" class="form-control">
+        </div>
+        <div class="adversarialsetting-option-wrap methodoption-subsetting form-group" *ngIf="displayFGSMOptions">
+          <label for="" class="tooltip">Targeted <i class="fa fa-info-circle"></i>
+            <span class="tooltiptext">
+              Boolean True or False. By default False. [Is the attack targeted or untargeted? Untargeted, the default, will try to make the label incorrect. Targeted will instead try to move in the direction of being more like y.]
+            </span>
+          </label>
+          <select disabled name="targeted" [(ngModel)]="model.targeted" #targeted="ngModel" (ngModelChange)="targetedValueChange($event)">
+            <option value="true">True</option>
+            <option value="false" selected>False</option>
+          </select>
+        </div>
+
+        <div class="adversarialsetting-option-wrap methodoption-subsetting form-group" *ngIf="displayJSMAOptions">
+          <label for="">Theta</label>
+          <input disabled type="text" name="theta" [(ngModel)]="model.theta" #theta="ngModel" (ngModelChange)="thetaValueChange($event)"  class="form-control">
+        </div>
+        <div class="adversarialsetting-option-wrap methodoption-subsetting form-group" *ngIf="displayJSMAOptions">
+          <label for="">Gamma</label>
+          <input disabled type="text" name="gamma" [(ngModel)]="model.gamma" #gamma="ngModel" (ngModelChange)="gammaValueChange($event)" class="form-control">
+        </div>
+
+        <div class="adversarialsetting-option-wrap form-group">
+          <!-- <button>Submit</button> -->
+        </div>
+      </div>
+      </form>
+
+    </div>
+  <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn"><i class="fa fa-times"></i></button>
+</div>
+<div *ngIf="visible" class="overlay" (click)="close()"></div>

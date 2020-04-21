@@ -1,0 +1,177 @@
+<div [@dialog] *ngIf="visible" class="dialog imageclassifiersetting-bg">
+  <div class="imageclassifiersetting-wrap">
+    <div class="imageclassifiersetting-header tooltip">Model Audit Settings <i class="fa fa-info-circle"></i>
+      <span class="tooltiptext">
+      Please choose categories to audit the model with respect to Robustness, Discrimination and Interpretability; together or individually.
+      </span>
+    </div>
+    <form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+    <div class="imageclassifiersetting-cont-wrap">
+      <div class="imageclassifiersetting-option-wrap form-group">
+        <label class="checkbox_wrap">
+          <input [disabled]="this.model.fourierfilteringValue || this.model.colortograyscaleValue || this.model.modelcomplexityValue" type="checkbox" name="generalizaionValue" [(ngModel)]="model.generalizaionValue" #generalizaionValue="ngModel">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Generalization <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          We are defining robustness on the basis of three categories - Attribute variation, Adversarial inputs, Model complexity.
+          </span>
+        </label>
+
+        <!-- <input type="text" name="thresholdValue" [(ngModel)]="model.thresholdValue" #thresholdValue="ngModel" (ngModelChange)="thresholdValueChange($event)" class="form-control"> -->
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+        <label class="checkbox_wrap">
+          <input type="checkbox" name="fourierfilteringValue" [(ngModel)]="model.fourierfilteringValue" #fourierfilteringValue="ngModel" (ngModelChange)="ongensubChange($event)">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Fourier Filtering <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          This test checks Model Inputs on adversarial inputs (i.e. those that may not occur naturally but can be mis-used by a malicious party).
+          </span>
+        </label>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+        <label class="checkbox_wrap">
+          <input type="checkbox" name="colortograyscaleValue" [(ngModel)]="model.colortograyscaleValue" #colortograyscaleValue="ngModel" (ngModelChange)="ongensubChange($event)">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Color to Grayscale <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          This test checks Model Inputs on adversarial inputs (i.e. those that may not occur naturally but can be mis-used by a malicious party).
+          </span>
+        </label>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+        <label class="checkbox_wrap">
+          <input type="checkbox" name="contrastValue" [(ngModel)]="model.contrastValue" #contrastValue="ngModel" (ngModelChange)="ongensubChange($event)">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Contrast <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          This test checks Model Inputs on adversarial inputs (i.e. those that may not occur naturally but can be mis-used by a malicious party).
+          </span>
+        </label>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+        <label class="checkbox_wrap">
+          <input type="checkbox" name="additivenoiseValue" [(ngModel)]="model.additivenoiseValue" #additivenoiseValue="ngModel" (ngModelChange)="ongensubChange($event)">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Additive noise <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          This test checks Model Inputs on adversarial inputs (i.e. those that may not occur naturally but can be mis-used by a malicious party).
+          </span>
+        </label>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+        <label class="checkbox_wrap">
+          <input type="checkbox" name="eidolonnoiseValue" [(ngModel)]="model.eidolonnoiseValue" #eidolonnoiseValue="ngModel" (ngModelChange)="ongensubChange($event)">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Eidolon noise <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          This test checks Model Inputs on adversarial inputs (i.e. those that may not occur naturally but can be mis-used by a malicious party).
+          </span>
+        </label>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+        <label class="checkbox_wrap">
+          <input type="checkbox" name="modelcomplexityValue" [(ngModel)]="model.modelcomplexityValue" #modelcomplexityValue="ngModel" (ngModelChange)="ongensubChange($event)">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Model Complexity <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          This test checks Model Inputs on adversarial inputs (i.e. those that may not occur naturally but can be mis-used by a malicious party).
+          </span>
+        </label>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap form-group">
+        <label class="checkbox_wrap">
+          <input [disabled]="model.adversarialExamplesValue || this.model.attributeVariationValue || this.model.modelComplexityValue" type="checkbox" name="robustnessValue" [(ngModel)]="model.robustnessValue" #robustnessValue="ngModel">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Robustness <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          We are defining robustness on the basis of three categories - Attribute variation, Adversarial inputs, Model complexity.
+          </span>
+        </label>
+
+        <!-- <input type="text" name="thresholdValue" [(ngModel)]="model.thresholdValue" #thresholdValue="ngModel" (ngModelChange)="thresholdValueChange($event)" class="form-control"> -->
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+        <label class="checkbox_wrap">
+          <input type="checkbox" name="adversarialExamplesValue" [(ngModel)]="model.adversarialExamplesValue" #adversarialExamplesValue="ngModel" (ngModelChange)="onsubChange($event)">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Adversarial Inputs <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          This test checks Model Inputs on adversarial inputs (i.e. those that may not occur naturally but can be mis-used by a malicious party).
+          </span>
+        </label>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+        <label class="checkbox_wrap">
+          <input type="checkbox" name="attributeVariationValue" [(ngModel)]="model.attributeVariationValue" #attributeVariationValue="ngModel" (ngModelChange)="onsubChange($event)">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Attribute Variation <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+            This test check Model performance on synthetic and yet real-life possible inputs.
+          </span>
+        </label>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap form-group">
+        <label class="checkbox_wrap">
+          <input type="checkbox" name="discriminationValue" [(ngModel)]="model.discriminationValue" #discriminationValue="ngModel">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Discrimination <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          Any distinction, exclusion or preference made on the basis of race, color, sex, religion, political opinion, national extraction or social origin, which has the effect of nullifying or impairing equality of opportunity or treatment.
+          </span>
+        </label>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap form-group">
+        <label class="checkbox_wrap">
+          <input type="checkbox" name="explainabilityValue" [(ngModel)]="model.explainabilityValue" #explainabilityValue="ngModel">
+          <span class="checkmark"></span>
+        </label>
+        <label for="" class="tooltip">Interpretability <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">
+          About explaining the predictions of a ML Model.
+          </span>
+        </label>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="imageclassifiersetting-option-wrap form-group">
+        <button>Submit</button>
+      </div>
+    </div>
+    </form>
+
+  </div>
+  <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn"><i class="fa fa-times"></i></button>
+</div>
+<div *ngIf="visible" class="overlay" (click)="close()"></div>

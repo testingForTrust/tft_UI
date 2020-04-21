@@ -1,0 +1,173 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.adversarialsetting-bg{
+  background: #fff;
+  background-size: cover;
+  font-family: 'Rubik', sans-serif;
+  color: rgba(0,0,0,.87);
+  position:relative;
+}
+
+.dialog {
+  z-index: 1000;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin: -165px 0px 0px -175px;
+  /* min-height: 200px; */
+  /* width: 90%; */
+  min-width: 350px;
+  padding: 10px;
+  box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* @media (min-width: 768px) {
+  .dialog {
+    top: 40px;
+  }
+} */
+
+.dialog__close-btn {
+  border: 0;
+  background: none;
+  color: rgba(20, 157, 204, 0.98);
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1.2em;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.adversarialsetting-header{
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  margin: 10px 0px 20px 0px;
+  color: rgba(20, 157, 204, 0.98);
+}
+
+.adversarialsetting-option-wrap{
+  margin: 0px 0px 10px 0px;
+  text-align: center;
+}
+
+.adversarialsetting-option-wrap label{
+  font-size: 14px;
+  font-weight: 500;
+  width: 90px;
+  display: inline-block;
+  text-align: left;
+}
+
+.adversarialsetting-option-wrap input{
+  width: 240px;
+  border: rgba(205, 205, 205, 0.6) solid 1px;
+  padding: 6px;
+}
+
+.adversarialsetting-option-wrap p{
+  width: 240px;
+  float: right;
+  font-size: 11px;
+  text-align: left;
+  margin: 5px 0px
+}
+
+.adversarialsetting-option-wrap  title{
+  font-size: 11px;
+  text-align: left;
+}
+
+
+.adversarialsetting-option-wrap select {
+    width: 240px;
+    height: 28px;
+    margin: 0px 0;
+    border: 0;
+    border: rgba(205, 205, 205, 0.6) solid 1px;
+    /* border-top: 4px solid black; */
+    background: #fff url('https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_keyboard_arrow_down_48px-128.png') no-repeat;
+    background-size: 20px;
+    background-position:  right 5px center;
+    font-family: 'Arial';
+    padding-left: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-border-radius: 0px;
+       -moz-border-radius: 0px;
+            border-radius: 0px;
+}
+
+.methodoption-subsetting{
+  margin: 0px 0px 10px 90px;
+}
+
+.methodoption-subsetting input{
+  width: 150px;
+  border: rgba(205, 205, 205, 0.6) solid 1px;
+  padding: 6px;
+}
+
+.methodoption-subsetting select{
+  width: 150px;
+}
+
+.adversarialsetting-option-wrap button{
+  display: inline-block;
+  font-size: 15px;
+  padding: 5px 20px;
+  background: rgba(20, 157, 204, 0.98);
+  color: rgba(255, 255, 255, 0.96);
+  border: none;
+  margin: 15px 0px 0px 0px;
+  cursor: pointer;
+}
+
+.tooltip {
+    position: relative;
+
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 340px;
+    background: rgba(10, 10, 10, 1);
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 400;
+
+    /* Position the tooltip */
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -170px;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}

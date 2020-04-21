@@ -1,0 +1,155 @@
+
+<div [@dialog] *ngIf="visible" class="dialog login-bg">
+	<!-- <ng-content></ng-content> -->
+
+  <mat-tab-group>
+  <mat-tab label="Login">
+    <form class="form-horizontal" [formGroup]="loginForm" novalidate (ngSubmit)="login()">
+        <div class="form-group useremail-wrap"
+             [ngClass]="{
+              'has-danger': userEmail.invalid && (userEmail.dirty || userEmail.touched),
+              'has-success': userEmail.valid && (userEmail.dirty || userEmail.touched)
+         }">
+      <label for="userEmail" class="control-label">Username</label>
+      <!-- <input type="email" class="form-control" id="userName" name="userName" required/> -->
+      <input type="email"
+           class="form-control"
+           formControlName="userEmail"
+           required
+           (input)="clearLoginEmail()"
+           >
+    <div class="form-control-feedback"
+         *ngIf="userEmail.errors && (userEmail.dirty || userEmail.touched)">
+
+      <p *ngIf="userEmail.errors.required">Email is required</p>
+      <p *ngIf="userEmail.errors.email">Enter correct Email ID</p>
+
+      <!-- <p *ngIf="userEmail.errors.pattern">The email address must contain at least the @ character</p> -->
+    </div>
+
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group userpassword-wrap"
+        [ngClass]="{
+        'has-danger': userPassword.invalid && (userPassword.dirty || userPassword.touched),
+        'has-success': userPassword.valid && (userPassword.dirty || userPassword.touched)
+       }">
+      <label for="userPassword" class="control-label">Password</label>
+      <!-- <input type="password" class="form-control" id="userPassword" name="userPassword" required/> -->
+      <input type="password"
+           class="form-control"
+           formControlName="userPassword"
+           required
+           (input)="clearLoginPassword()"
+           >
+    <div class="form-control-feedback"
+         *ngIf="userPassword.errors && (userPassword.dirty || userPassword.touched)">
+      <p *ngIf="userPassword.errors.required">Password is required</p>
+      <p *ngIf="userPassword.errors.minlength">Password is Weak</p>
+      <!-- <p *ngIf="userPassword.errors.minlength">Password must be 8 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p> -->
+    </div>
+      </div>
+      <div class="db-error" style="color: red">
+          <p>{{ loginEmailCheck }}</p>
+          <p>{{ loginPasswordCheck }}</p>
+        </div>
+      <button type="submit" class="btn-login" [disabled]="!loginForm.valid">Login</button>
+      <!-- <input class="btn btn-primary"  type="submit" value="Submit" /> -->
+    </form>
+  </mat-tab>
+  <mat-tab label="Register">
+    <form class="form-horizontal" [formGroup]="registerForm" novalidate (ngSubmit)="register()">
+      <div class="form-group registername-wrap"
+        [ngClass]="{
+          'has-danger': registerName.invalid && (registerName.dirty || registerName.touched),
+          'has-success': registerName.valid && (registerName.dirty || registerName.touched)
+      }">
+        <label for="registerName" class="control-label">Name</label>
+        <input type="text"
+             class="form-control"
+             formControlName="registerName"
+             required
+             (input)="clearRegisterName()"
+             >
+            <p class="text text-danger" style="color: red">{{ registerNameCheck }}</p>
+      <div class="form-control-feedback"
+           *ngIf="registerName.errors && (registerName.dirty || registerName.touched)">
+        <p *ngIf="registerName.errors.required">Name is required</p>
+      </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group registeremail-wrap"
+          [ngClass]="{
+            'has-danger': registerEmail.invalid && (registerEmail.dirty || registerEmail.touched),
+            'has-success': registerEmail.valid && (registerEmail.dirty || registerEmail.touched)
+       }">
+        <label for="registerEmail" class="control-label">Username</label>
+        <input type="email"
+           class="form-control"
+           formControlName="registerEmail"
+           required
+           (input)="clearRegisterEmail()"
+           >
+          <p class="text text-danger" style="color: red">{{ registerEmailCheck }}</p>
+        <div class="form-control-feedback"
+             *ngIf="registerEmail.errors && (registerEmail.dirty || registerEmail.touched)">
+          <p *ngIf="registerEmail.errors.required">Email is required</p>
+          <p *ngIf="registerEmail.errors.email">Enter correct Email ID</p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group registerpassword-wrap"
+          [ngClass]="{
+            'has-danger': registerPassword.invalid && (registerPassword.dirty || registerPassword.touched),
+            'has-success': registerPassword.valid && (registerPassword.dirty || registerPassword.touched)
+       }">
+        <label for="registerPassword" class="control-label">Password</label>
+        <input type="password"
+           class="form-control"
+           formControlName="registerPassword"
+           required>
+        <div class="form-control-feedback"
+             *ngIf="registerPassword.errors && (registerPassword.dirty || registerPassword.touched)">
+          <p *ngIf="registerPassword.errors.required">Password is required</p>
+          <p *ngIf="registerPassword.errors.minlength">Password is Weak</p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group registerrepeatpassword-wrap"
+          [ngClass]="{
+            'has-danger': registerRepeatPassword.invalid && (registerRepeatPassword.dirty || registerRepeatPassword.touched),
+            'has-success': registerRepeatPassword.valid && (registerRepeatPassword.dirty || registerRepeatPassword.touched)
+       }">
+        <label for="registerRepeatPassword" class="control-label">Repeat Password</label>
+        <input type="password"
+           class="form-control"
+           formControlName="registerRepeatPassword"
+           required
+           (input)="clearRegisterPassword()"
+           >
+           <p class="text text-danger" style="color: red">{{ registerPasswordCheck }}</p>
+        <div class="form-control-feedback"
+             *ngIf="(registerRepeatPassword.errors && (registerRepeatPassword.dirty || registerRepeatPassword.touched) || registerForm .errors?.mismatch)">
+          <!-- <p *ngIf="registerRepeatPassword.errors.required">Password is required</p> -->
+          <!-- <p *ngIf="registerRepeatPassword.errors.minlength">Password Weak</p> -->
+          <p *ngIf="registerRepeatPassword.errors || registerForm .errors?.mismatch">Password doesn't match</p>
+        </div>
+
+      </div>
+      <div class="db-error">
+        <!--<p>{{ bderrorInput.email }}</p>
+        <p>{{ bderrorInput.password }}</p>
+        <p>{{ bderrorInput.name }}</p>
+      -->
+      </div>
+      <button type="submit" class="btn-register" [disabled]="!registerForm.valid">
+        Register
+      </button>
+
+    </form>
+  </mat-tab>
+</mat-tab-group>
+	<button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn"><i class="fa fa-times"></i></button>
+</div>
+<div *ngIf="visible" class="overlay" (click)="close()"></div>

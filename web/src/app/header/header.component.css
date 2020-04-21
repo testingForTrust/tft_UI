@@ -1,0 +1,63 @@
+header{
+  /*background: #000000;*/
+  background: url("/assets/images/header-bg.svg") #000000  no-repeat fixed top left;
+  background-size: contain;
+  width: 100%;
+  height: 50px;
+  border-bottom: #149dcc solid 2px;
+  position: fixed;
+  top: 0px;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.header-left-wrap{
+  float: left;
+  margin: 0px 0px 0px 10px;
+}
+
+.header-left-wrap span{
+  color: rgba(255, 255, 255, 0.99);
+  font-size: 26px;
+  font-weight: 700;
+  display: block;
+  margin: 13px 0px 0px 0px;
+  cursor: pointer;
+}
+
+.header-right-wrap{
+  float: right;
+  margin: 35px 10px 0px 0px;
+  width: 165px;
+}
+
+.login-wrap{
+  float: right;
+  margin: 17px 10px 0px 0px;
+  display: none;
+}
+
+.login-wrap a{
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login-wrap span{
+  color: #fff;
+  font-size: 13px;
+}
+
+.login-wrap a span i{
+  font-family: 'FontAwesome';
+  font-size: 14px;
+}
+
+.login-show{
+  display: block;
+}
+
+.username-wrap{
+  float: right;
+  margin: -10px 5px 0px 0px;
+}

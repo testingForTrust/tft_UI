@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*__pycache__/
+./TestingForTrust/__pycache__/
+./adversarial/__pycache__/
+./adversarial/migrations/__pycache__/
+./ProjectApp/__pycache__/
+./ProjectApp/migrations/__pycache__/
+./Accounts/__pycache__/
+./Accounts/migrations/__pycache__/
+*.py[cod]
+*$py.class
+
+# pycharm project settings
+.idea
+.idea/workspace.xml
+
+# dependencies
+./web/node_modules

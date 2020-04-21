@@ -1,0 +1,221 @@
+.section-01{
+  background: linear-gradient(45deg, #7fd9fc, #6576aa);
+  font-family: 'Rubik', sans-serif;
+}
+
+.section-02{
+  background: url("/assets/images/homepage-images/section-02_bg.jpg") #000000  no-repeat center center;
+  background-size: cover;
+  font-family: 'Rubik', sans-serif;
+}
+
+.section-03{
+  background: linear-gradient(0deg, #f9f9f9, #149dcc);
+  font-family: 'Rubik', sans-serif;
+}
+
+.section-01 h1{
+  display: block;
+  text-align: center;
+  color: #FFF;
+  font-size: 70px;
+  font-weight: 300;
+  margin: 10px 0px 30px 0px;
+  opacity: 0;
+}
+
+.section-01 p{
+  display: block;
+  text-align: center;
+  color: #FFF;
+  font-size: 25px;
+  line-height: 35px;
+  font-weight: 400;
+  width: 90%;
+  margin: 0 auto;
+  opacity: 0;
+}
+
+.media-container-row{
+  flex-wrap: nowrap;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: start;
+  -ms-flex-align: start;
+  align-items: start;
+}
+
+.card{
+  position: relative;
+  width: 33%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-clip: border-box;
+  opacity: 0;
+}
+
+.card-col{
+  display: inline-block;
+}
+
+.card-img{
+  background: #149dcc;
+  padding: 10px;
+  text-align: center;
+  padding: 0px 0px 0px 0px
+}
+
+.card-img span{
+  display: block;
+  width: 150px;
+  height: 150px;
+  color: rgb(255, 255, 255);
+  margin: 0 auto;
+}
+
+.card-img span.icon-01{
+  background: url("/assets/images/homepage-images/icons/audit.svg")  no-repeat center center;
+  background-size: cover;
+}
+
+.card-img span.icon-02{
+  background: url("/assets/images/homepage-images/icons/structured-data.svg")  no-repeat center center;
+  background-size: cover;
+}
+
+.card-img span.icon-03{
+  background: url("/assets/images/homepage-images/icons/unstructured-data.svg")  no-repeat center center;
+  background-size: cover;
+}
+
+.card-box{
+  background: linear-gradient(#149dcc, transparent);
+  padding: 10px;
+  text-align: center;
+}
+
+.card-title{
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  margin: 10px 0px 10px 0px;
+  display: block;
+  min-height: 90px;
+}
+
+.card-txt{
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+}
+
+.card-btn{
+  clear: both;
+  margin: 10px 0px 50px 0px;
+}
+
+.card-btn a{
+  font-size: 18px;
+  color: #ffffff;
+  background: #ff3366;
+  border-color: #ff3366;
+  border-radius: 30px;
+  padding: 15px 50px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.media-container-row-alt{
+
+}
+
+.section-title{
+  font-size: 50px;
+  color: rgb(255, 255, 255);
+  display: block;
+  text-align: center;
+  margin: 0px 0px 30px 0px;
+  opacity: 0;
+}
+
+.section-03-cont-wrap{
+  opacity: 0;
+}
+
+.nav-tabs{
+
+}
+
+.nav-tabs{
+  text-align: center;
+  margin: 20px 0px;
+}
+
+.nav-tabs li{
+  display: inline-block;
+  margin: 0px 20px;
+}
+
+.nav-tabs li a{
+  font-size: 16px;
+  color: #fff;
+  padding: 18px 60px;
+  min-width: 210px;
+  display: inline-block;
+  border-radius: 25px;
+  text-decoration: none;
+  border: #fff solid 1px;
+  cursor: pointer;
+}
+
+.nav-tabs li a:hover, .nav-tabs li a.active{
+  background: #ff3366;
+  border: #fff solid 1px;
+}
+
+/* Animation for Slides */
+
+.animated{
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.anim_delay_01{
+  animation-delay: 1s;
+}
+
+.fadeIn{
+  opacity: 1 !important;
+}
+
+.tab-pane{
+  min-height: 100px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 28px;
+  width: 700px;
+  margin: 30px auto 0 auto;
+}

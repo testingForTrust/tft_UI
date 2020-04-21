@@ -1,0 +1,19 @@
+<header>
+  <div class="header-left-wrap">
+    <!-- <img src="../assets/images/testingfortrust-logo.svg" alt="Testing for Trust"> -->
+    <span (click)="navigateToHP()">Teach & Test: Testing For Trust</span>
+  </div>
+  <!-- <div class="header-right-wrap">
+    <img src="../assets/images/logo.svg" alt="Accenture">
+  </div> -->
+
+  <!-- <div class="login-wrap login-show">
+    <a id="LoginButton" (click)="showDialog = !showDialog" *ngIf="showLogin" ><span>Login <i class="fa fa-sign-in"></i></span></a>
+    <div class="username-wrap" *ngIf="showLogout" ><span>Hi {{loggedinUserName}} </span></div>
+    <div class="clearfix"></div>
+    <a  (click)="logout()" *ngIf="showLogout" ><span>LogOut <i class="fa fa-sign-out"></i></span></a>
+
+  </div> -->
+  <div class="clearfix"></div>
+</header>
+<app-login [(visible)]="showDialog" (loginValueCheck)="loginCheckValue($event)"> </app-login>

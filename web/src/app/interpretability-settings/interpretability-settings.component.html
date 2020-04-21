@@ -1,0 +1,43 @@
+<div [@dialog] *ngIf="visible" class="dialog interpretabilitysetting-bg">
+    <div class="interpretabilitysetting-wrap">
+      <div class="interpretabilitysetting-header">Interpretability Settings</div>
+      <form name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+      <div class="interpretabilitysetting-cont-wrap">
+        <div class="interpretabilitysetting-option-wrap form-group">
+          <label for="" class="tooltip">num_features <i class="fa fa-info-circle"></i>
+            <span class="tooltiptext">
+            number of superpixels to include in explanation (By Default 5)
+            </span>
+          </label>
+          <input disabled type="text" name="num_features" [(ngModel)]="model.num_features" #num_features="ngModel" class="form-control" />
+        </div>
+        <div class="clearfix"></div>
+        <div class="interpretabilitysetting-option-wrap form-group">
+          <label for="" class="tooltip">num_samples <i class="fa fa-info-circle"></i>
+            <span class="tooltiptext">
+            size of the neighborhood to learn the linear model (By Default 200)
+            </span>
+          </label>
+          <input disabled type="text" name="num_samples" [(ngModel)]="model.num_samples" #num_samples="ngModel" class="form-control">
+        </div>
+        <!-- <div class="interpretabilitysetting-option-wrap form-group">
+          <label for="" class="tooltip">hide_rest <i class="fa fa-info-circle"></i>
+            <span class="tooltiptext">
+            if True, make the non-explanation part of the return image gray
+            </span>
+          </label>
+          <label class="checkbox_wrap">
+            <input type="checkbox" name="hide_rest" [(ngModel)]="model.hide_rest" #hide_rest="ngModel">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <div class="interpretabilitysetting-option-wrap form-group btn-wrap">
+          <button>Submit</button>
+        </div> -->
+      </div>
+      </form>
+
+    </div>
+  <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn"><i class="fa fa-times"></i></button>
+</div>
+<div *ngIf="visible" class="overlay" (click)="close()"></div>

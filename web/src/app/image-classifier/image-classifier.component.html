@@ -1,0 +1,1431 @@
+<div class="img-classifier-wrap">
+<mat-drawer-container class="insidepage-container" autosize>
+<mat-drawer #drawer class="insidepage-sidenav" mode="side">
+<div class="sidenav-cont-header">
+<span>Input</span> <!-- <a (click)="showMainSetting = !showMainSetting" ><i class="fa fa-cogs"></i></a> -->
+<div class="clearfix"></div>
+</div>
+<!-- <form class="form-horizontal" [formGroup]="imgClassifierForm" ngIfnovalidate (ngSubmit)="createProject()"> -->
+<form name="form" #f="ngForm" novalidate>
+<div class="sidenav-form-wrap">
+<div class="sidenav-cont-wrap sidenav-cont-input">
+<!-- <span>Project Name</span>
+<input type="text"
+class="form-control"
+formControlName="projectName"
+required
+placeholder="Project Name"
+>
+<div class="form-control-validation"
+*ngIf="projectName.errors && (projectName.dirty || projectName.touched)">
+<p>Project name is required</p>
+</div>
+</div>
+
+<div class="clearfix"></div>
+<div class="sidenav-cont-wrap sidenav-cont-input">
+<span>Model Path</span>
+<input type="text"
+class="form-control"
+formControlName="modelName"
+required
+placeholder="Model Path">
+<div class="form-control-validation"
+*ngIf="modelName.errors && (modelName.dirty || modelName.touched)">
+<p>Model path is required</p>
+</div>
+</div>
+<div class="clearfix"></div>
+
+<div class="sidenav-cont-wrap sidenav-cont-input">
+<span>Sample Data Path</span>
+<input type="text"
+class="form-control"
+formControlName="sampleData"
+required
+placeholder="Sample Data Path">
+<div class="form-control-validation"
+*ngIf="sampleData.errors && (sampleData.dirty || sampleData.touched)">
+<p>Sample data is required</p>
+</div>
+</div>
+<div class="sidenav-cont-wrap">
+<div class="sidenav-cont-settings-wrap">
+<button type="submit" class="btn-register" [disabled]="(checkicValue()!==true || !imgClassifierForm.valid)">
+Testing For Trust
+</button>
+</div> -->
+<div class="imageclassifiersetting-cont-wrap">
+<div class="imageclassifiersetting-option-wrap form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="this.model.fourierfilteringValue || this.model.colortograyscaleValue || this.model.contrastValue || this.model.additivenoiseValue || this.model.eidolonnoiseValue || this.model.modelcomplexityValue" type="checkbox"
+      name="generalizaionValue" [(ngModel)]="model.generalizaionValue" #generalizaionValue="ngModel">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Generalization <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      Measures the ability of the algorithm to perform well on new inputs not seen during training.
+    </span>
+  </label>
+
+  <!-- <input type="text" name="thresholdValue" [(ngModel)]="model.thresholdValue" #thresholdValue="ngModel" (ngModelChange)="thresholdValueChange($event)" class="form-control"> -->
+</div>
+<div class="clearfix"></div>
+<div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="rotationtranslationValue" [(ngModel)]="model.rotationtranslationValue" #rotationtranslationValue="ngModel" (ngModelChange)="ongensubChange($event)">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Rotation & Translation <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      This test checks the ability of the classifier to be invariant to small rotations (i.e. changing the orientation) and translations (shifting of the pixels) of the image.
+    </span>
+  </label>
+
+</div>
+<div class="clearfix"></div>
+<div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="fourierfilteringValue" [(ngModel)]="model.fourierfilteringValue" #fourierfilteringValue="ngModel" (ngModelChange)="ongensubChange($event)">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Fourier Filtering <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      This test checks the ability of the classifier to be invariant to information loss – where frequencies with low information content are removed.
+    </span>
+  </label>
+
+</div>
+<div class="clearfix"></div>
+<div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="colortograyscaleValue" [(ngModel)]="model.colortograyscaleValue" #colortograyscaleValue="ngModel" (ngModelChange)="ongensubChange($event)">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Color to Grayscale <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      This test checks whether the classifier is invariant to the color content of the image.
+    </span>
+  </label>
+
+</div>
+<div class="clearfix"></div>
+<div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="contrastValue" [(ngModel)]="model.contrastValue" #contrastValue="ngModel" (ngModelChange)="ongensubChange($event)">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Contrast <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      This test checks whether the classifier is invariant to the contrast of the image.
+    </span>
+  </label>
+
+</div>
+<div class="clearfix"></div>
+<div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="additivenoiseValue" [(ngModel)]="model.additivenoiseValue" #additivenoiseValue="ngModel" (ngModelChange)="ongensubChange($event)">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Additive noise <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      This test checks whether the classifier is invariant to low amounts of noise in an image.
+    </span>
+  </label>
+</div>
+<div class="clearfix"></div>
+<div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="eidolonnoiseValue" [(ngModel)]="model.eidolonnoiseValue" #eidolonnoiseValue="ngModel" (ngModelChange)="ongensubChange($event)">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Eidolon noise <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      This test checks Model Inputs on adversarial inputs (i.e. those that may not occur naturally but can be mis-used by a malicious party).
+    </span>
+  </label>
+
+</div>
+<!-- <div class="clearfix"></div>
+<div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="modelcomplexityValue" [(ngModel)]="model.modelcomplexityValue" #modelcomplexityValue="ngModel" (ngModelChange)="ongensubChange($event)">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Model Complexity <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      This test checks whether the model is susceptible to overfitting or underfitting.
+    </span>
+  </label>
+</div> -->
+<div class="clearfix"></div>
+<div class="imageclassifiersetting-option-wrap form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="model.adversarialExamplesValue || this.model.adversarialPatchesValue || this.model.modelComplexityValue" type="checkbox" name="robustnessValue" [(ngModel)]="model.robustnessValue" #robustnessValue="ngModel">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Robustness <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      Measures the ability of the algorithm to be not susceptible to maliciously crafted inputs to specifically fool the algorithm.
+    </span>
+  </label>
+
+  <!-- <input type="text" name="thresholdValue" [(ngModel)]="model.thresholdValue" #thresholdValue="ngModel" (ngModelChange)="thresholdValueChange($event)" class="form-control"> -->
+</div>
+<div class="clearfix"></div>
+<div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="adversarialExamplesValue" [(ngModel)]="model.adversarialExamplesValue" #adversarialExamplesValue="ngModel" (ngModelChange)="onsubChange($event)">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Adversarial Inputs <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      This test checks Model Inputs on adversarial inputs (i.e. those that may not occur naturally but can be mis-used by a malicious party).
+    </span>
+  </label>
+
+</div>
+<!-- <div class="clearfix"></div>
+<div class="imageclassifiersetting-option-wrap imageclassifiersetting-subsetting form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="adversarialPatchesValue" [(ngModel)]="model.adversarialPatchesValue" #adversarialPatchesValue="ngModel" (ngModelChange)="onsubChange($event)">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Adversarial Patches <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      This tests the impact of the classifier when a specially crafted adversarial patch is introduced.
+    </span>
+  </label>
+</div> -->
+<div class="clearfix"></div>
+<!-- <div class="imageclassifiersetting-option-wrap form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="discriminationValue" [(ngModel)]="model.discriminationValue" #discriminationValue="ngModel">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Discrimination <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      Any distinction, exclusion or preference made on the basis of race, color, sex, religion, political opinion, national extraction or social origin, which has the effect of nullifying or impairing equality of opportunity or
+      treatment.
+    </span>
+  </label>
+
+</div>
+<div class="clearfix"></div> -->
+<div class="imageclassifiersetting-option-wrap form-group">
+  <label class="checkbox_wrap">
+    <input [disabled]="true" type="checkbox" name="explainabilityValue" [(ngModel)]="model.explainabilityValue" #explainabilityValue="ngModel">
+    <span class="checkmark"></span>
+  </label>
+  <label for="" class="tooltip">Interpretability <i class="fa fa-info-circle"></i>
+    <span class="tooltiptext">
+      Provides clue to interpret the decision of the algorithm.
+    </span>
+  </label>
+
+</div>
+<div class="clearfix"></div>
+<!-- <div class="imageclassifiersetting-option-wrap form-group">
+<button>Submit</button>
+</div> -->
+</div>
+
+</div>
+</div>
+</form>
+</mat-drawer>
+
+<div class="insidepage-sidenav-content">
+<button class="btn-menu" type="button" mat-button (click)="drawer.toggle()">
+<div #menuBurger class="burger" (click)="menuclick()" id="menuBurger">
+<div class="x"></div>
+<div class="y"></div>
+<div class="z"></div>
+</div>
+</button>
+
+<mat-tab-group class="full-width-wrap" md-no-pagination="true">
+
+<mat-tab label="Generalization">
+
+<div class="innerpage-wrap">
+
+  <div class="innerpage-row innerpage-row-01">
+
+  <div class="innerpage-row-col row-col-left">
+    <div class="row-col-header">
+      <span>Rotation & Translation</span>
+      <a><i (click)="adversarialSetting = !adversarialSetting; settingMethod($event)" id="rnts" class="fa fa-cogs"></i></a>
+    </div>
+    <div class="row-col-content">
+      This test checks the ability of the classifier to be invariant to small rotations (i.e. changing the orientation) and translations (shifting of the pixels) of the image.
+    </div>
+  </div>
+
+  <div class="innerpage-row-col row-col-initial" *ngIf="showInitialTableRotationTranslation">
+    <div class="row-col-initial-header">% of Examples Classified by the Model Correctly</div>
+    <div class="clearfix"></div>
+
+    <div class="initial-circle-wrap" *ngFor="let rec of overallObjRecRotationTranslationData">
+      <div class="initial-circle-content">
+        <div class="c100 p{{ rec.overallMatricsOriginalPrecision }} green">
+          <span>{{ rec.overallMatricsOriginalPrecision }}%</span>
+          <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+          </div>
+        </div>
+        <div class="circle-header">On Original</div>
+      </div>
+
+      <div class="initial-circle-content">
+        <div class="c100 p{{ rec.overallMatricsPrecision }} {{ rec.overallMatricsDiff }}">
+          <span>{{ rec.overallMatricsPrecision }}%</span>
+          <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+          </div>
+        </div>
+        <div class="circle-header">On Rotation & Translation</div>
+      </div>
+    </div>
+    <div class="circle-btn" (click)="showDetailFuncRotationTranslation()">View Further Details</div>
+  </div>
+
+  <div class="innerpage-row-col row-col-right" *ngIf="showDetailTableRotationTranslation">
+    <div class="row-col-matrix-content">
+      <div class="col-right-table-wrap">
+        <div class="col-right-table-header">% of Examples Correctly Classified for each Class</div>
+        <div class="detailExample-wrap">
+          <div class="detailExample-cont" *ngFor="let rec of filterClassMatricsData_Obj_RotationTranslation">
+            <div class="detailExample-cont-className" (click)="selectedClassItems_RotationTranslation($event); rotationtranslationClassClick()">{{rec.className}}</div>
+            <div class="detailExample-cont-circle">
+              <div class="c100 p{{rec.originalExample}} small green">
+                <span>{{ rec.originalExample }}%</span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+              <div class="detailExample-cont-header">On Original</div>
+            </div>
+            <div class="detailExample-cont-circle">
+              <div class="c100 p{{rec.adversarialExample}} small {{ rec.diffRecall }}">
+                <span>{{rec.adversarialExample}}%</span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+              <div class="detailExample-cont-header">On Rotation & Translation</div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="innerpage-row-col row-col-mid" *ngIf="showDetailTableRotationTranslation">
+    <div class="slider-txt-display" *ngIf="rotationtranslationshowPara">
+      <p>Click on Class Name to view the Example of each Class</p>
+    </div>
+    <div class="slider-wrap" *ngIf="rotationtranslationshowSlider">
+	<div class="carousel-wrapper">
+    <swiper  [config]="config" [(index)]="index1" [disabled]="disabled"
+    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+    <div *ngFor="let item of objectRecRotationTranslationImages" class="swiper-slide">
+    <div >
+    <div class="item">
+    <div class="item-inside item-inside-01">
+    <p>Original Image Classified as - {{item.orgName}}</p>
+    <img src="./assets/results/Generalization/RotationNTranslation/Results/{{item.className}}/original/{{item.image}}">
+    </div>
+    <div class="col-mid-img-cont-wrap col-mid-mid">
+    <i class="fa fa-long-arrow-right"></i>
+    </div>
+    <div class="item-inside item-inside-02">
+      <p>With Rotation {{ item.rotationDegree }} Degree/s & Translation of {{ item.translationPixel
+       }} Pixels, Image Classified as - {{item.perName}}</p>
+    <img src="./assets/results/Generalization/RotationNTranslation/Results/{{item.className}}/perturbed/{{item.image}}">
+    </div>
+    </div>
+    </div>
+    </div>
+    </swiper>
+    </div>
+
+    </div>
+    <div class="details-back-btn" (click)="showInitialFuncRotationTranslation()">View Overall Metrics.</div>
+  </div>
+
+  <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+
+<div class="innerpage-row innerpage-row-02">
+
+<div class="innerpage-row-col row-col-left">
+  <div class="row-col-header">
+    <span>Fourier Filtering</span>
+    <a><i (click)="adversarialSetting = !adversarialSetting; settingMethod($event)" id="ffs" class="fa fa-cogs"></i></a>
+  </div>
+  <div class="row-col-content">
+    This test checks the ability of the classifier to be invariant to information loss – where frequencies with low information content are removed.
+  </div>
+</div>
+
+<div class="innerpage-row-col row-col-initial" *ngIf="showInitialTableFourierFiltering">
+  <div class="row-col-initial-header">% of Examples Classified by the Model Correctly</div>
+  <div class="clearfix"></div>
+
+  <div class="initial-circle-wrap" *ngFor="let rec of overallFourierData">
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsOriginalPrecision }} green">
+        <span>{{ rec.overallMatricsOriginalPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Original</div>
+    </div>
+
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsPrecision }} {{ rec.overallMatricsDiff }}">
+        <span>{{ rec.overallMatricsPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Fourier Filtering</div>
+    </div>
+  </div>
+  <div class="circle-btn" (click)="showDetailFuncFourierFiltering()">View Further Details</div>
+</div>
+
+<div class="innerpage-row-col row-col-right" *ngIf="showDetailTableFourierFiltering">
+  <div class="row-col-matrix-content">
+    <div class="col-right-table-wrap">
+      <div class="col-right-table-header">% of Examples Correctly Classified for each Class</div>
+      <div class="detailExample-wrap">
+        <div class="detailExample-cont" *ngFor="let rec of filterClassMatricsData_Fourier">
+          <div class="detailExample-cont-className" (click)="selectedClassItems_Fourier($event); fourierfilteringClassClick()">{{rec.className}}</div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.originalExample}} small green">
+              <span>{{ rec.originalExample }}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Original</div>
+          </div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.adversarialExample}} small {{ rec.diffRecall }}">
+              <span>{{rec.adversarialExample}}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Fourier Filtering</div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="innerpage-row-col row-col-mid" *ngIf="showDetailTableFourierFiltering">
+  <div class="slider-txt-display" *ngIf="fourierfilteringshowPara">
+    <p>Click on Class Name to view the Example of each Class</p>
+  </div>
+  <div class="slider-wrap" *ngIf="fourierfilteringshowSlider">
+    <div class="carousel-wrapper">
+    <swiper  [config]="config" [(index)]="index2" [disabled]="disabled"
+    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+    <div *ngFor="let item of fourierFilteredImages" class="swiper-slide">
+    <div >
+    <div class="item">
+    <div class="item-inside item-inside-01">
+    <p>Original Image Classified as - {{item.orgName}}</p>
+    <img src="./assets/results/Generalization/FourierRadialFiltering/Results/{{item.className}}/original/{{item.image}}">
+    </div>
+    <div class="col-mid-img-cont-wrap col-mid-mid">
+    <i class="fa fa-long-arrow-right"></i>
+    </div>
+    <div class="item-inside item-inside-02">
+    <p>Original Image Classified as - {{item.perName}}</p>
+    <img src="./assets/results/Generalization/FourierRadialFiltering/Results/{{item.className}}/perturbed/{{item.image}}">
+    </div>
+    </div>
+    </div>
+    </div>
+    </swiper>
+    </div>
+
+  </div>
+  <div class="details-back-btn" (click)="showInitialFuncFourierFiltering()">View Overall Metrics.</div>
+</div>
+
+<div class="clearfix"></div>
+</div>
+
+<div class="innerpage-row innerpage-row-03">
+
+<div class="innerpage-row-col row-col-left">
+  <div class="row-col-header">
+    <span>Gray Scale</span>
+    <a><i (click)="adversarialSetting = !adversarialSetting; settingMethod($event)" id="gss" class="fa fa-cogs"></i></a>
+  </div>
+  <div class="row-col-content">
+    This test checks whether the classifier is invariant to the color content of the image.
+  </div>
+</div>
+
+<div class="innerpage-row-col row-col-initial" *ngIf="showInitialTableGrayScale">
+  <div class="row-col-initial-header">% of Examples Classified by the Model Correctly</div>
+  <div class="clearfix"></div>
+
+  <div class="initial-circle-wrap" *ngFor="let rec of overallObjRecGrayScaleData">
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsOriginalPrecision }} green">
+        <span>{{ rec.overallMatricsOriginalPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Original</div>
+    </div>
+
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsPrecision }} {{ rec.overallMatricsDiff }}">
+        <span>{{ rec.overallMatricsPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Gray Scale</div>
+    </div>
+  </div>
+  <div class="circle-btn" (click)="showDetailFuncGrayScale()">View Further Details</div>
+</div>
+
+<div class="innerpage-row-col row-col-right" *ngIf="showDetailTableGrayScale">
+  <div class="row-col-matrix-content">
+    <div class="col-right-table-wrap">
+      <div class="col-right-table-header">% of Examples Correctly Classified for each Class</div>
+      <div class="detailExample-wrap">
+        <div class="detailExample-cont" *ngFor="let rec of filterClassMatricsData_Obj_GrayScale">
+          <div class="detailExample-cont-className" (click)="selectedClassItems_GrayScale($event); grayscaleClassClick()">{{rec.className}}</div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.originalExample}} small green">
+              <span>{{ rec.originalExample }}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Original</div>
+          </div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.adversarialExample}} small {{ rec.diffRecall }}">
+              <span>{{rec.adversarialExample}}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Gray Scale</div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="innerpage-row-col row-col-mid" *ngIf="showDetailTableGrayScale">
+  <div class="slider-txt-display" *ngIf="grayscaleshowPara">
+    <p>Click on Class Name to view the Example of each Class</p>
+  </div>
+  <div class="slider-wrap" *ngIf="grayscaleshowSlider">
+    <div class="carousel-wrapper">
+    <swiper  [config]="config" [(index)]="index3" [disabled]="disabled"
+    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+    <div *ngFor="let item of objectRecGrayScaleImages" class="swiper-slide">
+    <div >
+    <div class="item">
+    <div class="item-inside item-inside-01">
+    <p>Original Image Classified as - {{item.orgName}}</p>
+    <img src="./assets/results/Generalization/Object_Recognition/Results/GrayScale/{{item.className}}/original/{{item.image}}">
+    </div>
+    <div class="col-mid-img-cont-wrap col-mid-mid">
+    <i class="fa fa-long-arrow-right"></i>
+    </div>
+    <div class="item-inside item-inside-02">
+    <p>Original Image Classified as - {{item.perName}}</p>
+    <img src="./assets/results/Generalization/Object_Recognition/Results/GrayScale/{{item.className}}/perturbed/{{item.image}}">
+    </div>
+    </div>
+    </div>
+    </div>
+    </swiper>
+    </div>
+
+  </div>
+  <div class="details-back-btn" (click)="showInitialFuncGrayScale()">View Overall Metrics.</div>
+</div>
+
+<div class="clearfix"></div>
+</div>
+
+<div class="innerpage-row innerpage-row-04">
+
+<div class="innerpage-row-col row-col-left">
+  <div class="row-col-header">
+    <span>Contrast</span>
+    <a><i (click)="adversarialSetting = !adversarialSetting; settingMethod($event)" id="cs" class="fa fa-cogs"></i></a>
+  </div>
+  <div class="row-col-content">
+    This test checks whether the classifier is invariant to the contrast of the image.
+  </div>
+</div>
+
+<div class="innerpage-row-col row-col-initial" *ngIf="showInitialTableContrast">
+  <div class="row-col-initial-header">% of Examples Classified by the Model Correctly</div>
+  <div class="clearfix"></div>
+
+  <div class="initial-circle-wrap" *ngFor="let rec of overallObjRecContrastData">
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsOriginalPrecision }} green">
+        <span>{{ rec.overallMatricsOriginalPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Original</div>
+    </div>
+
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsPrecision }} {{ rec.overallMatricsDiff }}">
+        <span>{{ rec.overallMatricsPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Contrast</div>
+    </div>
+  </div>
+  <div class="circle-btn" (click)="showDetailFuncContrast()">View Further Details</div>
+</div>
+
+<div class="innerpage-row-col row-col-right" *ngIf="showDetailTableContrast">
+  <div class="row-col-matrix-content">
+    <div class="col-right-table-wrap">
+      <div class="col-right-table-header">% of Examples Correctly Classified for each Class</div>
+      <div class="detailExample-wrap">
+        <div class="detailExample-cont" *ngFor="let rec of filterClassMatricsData_Obj_Contrast">
+          <div class="detailExample-cont-className" (click)="selectedClassItems_Contrast($event); contrastClassClick()">{{rec.className}}</div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.originalExample}} small green">
+              <span>{{ rec.originalExample }}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Original</div>
+          </div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.adversarialExample}} small {{ rec.diffRecall }}">
+              <span>{{rec.adversarialExample}}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Contrast</div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="innerpage-row-col row-col-mid" *ngIf="showDetailTableContrast">
+  <div class="slider-txt-display" *ngIf="contrastshowPara">
+    <p>Click on Class Name to view the Example of each Class</p>
+  </div>
+
+  <div class="slider-wrap" *ngIf="contrastshowSlider">
+    <div class="carousel-wrapper">
+    <swiper  [config]="config" [(index)]="index4" [disabled]="disabled"
+    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+    <div *ngFor="let item of objectRecContrastImages" class="swiper-slide">
+    <div >
+    <div class="item">
+    <div class="item-inside item-inside-01">
+    <p>Original Image Classified as - {{item.orgName}}</p>
+    <img src="./assets/results/Generalization/Object_Recognition/Results/LowContrast/{{item.className}}/original/{{item.image}}">
+    </div>
+    <div class="col-mid-img-cont-wrap col-mid-mid">
+    <i class="fa fa-long-arrow-right"></i>
+    </div>
+    <div class="item-inside item-inside-02">
+    <p>Original Image Classified as - {{item.perName}}</p>
+    <img src="./assets/results/Generalization/Object_Recognition/Results/LowContrast/{{item.className}}/perturbed/{{item.image}}">
+    </div>
+    </div>
+    </div>
+    </div>
+    </swiper>
+    </div>
+  </div>
+  <div class="details-back-btn" (click)="showInitialFuncContrast()">View Overall Metrics.</div>
+</div>
+<div class="clearfix"></div>
+</div>
+
+<div class="innerpage-row innerpage-row-05">
+
+<div class="innerpage-row-col row-col-left">
+  <div class="row-col-header">
+    <span>Additive Noise</span>
+    <a><i (click)="adversarialSetting = !adversarialSetting; settingMethod($event)" id="ans" class="fa fa-cogs"></i></a>
+  </div>
+  <div class="row-col-content">
+    This test checks whether the classifier is invariant to low amounts of noise in an image.
+  </div>
+</div>
+
+<div class="innerpage-row-col row-col-initial" *ngIf="showInitialTableAdditiveNoise">
+  <div class="row-col-initial-header">% of Examples Classified by the Model Correctly</div>
+  <div class="clearfix"></div>
+
+  <div class="initial-circle-wrap" *ngFor="let rec of overallObjRecAdditiveNoiseData">
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsOriginalPrecision }} green">
+        <span>{{ rec.overallMatricsOriginalPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Original</div>
+    </div>
+
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsPrecision }} {{ rec.overallMatricsDiff }}">
+        <span>{{ rec.overallMatricsPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Additive Noise</div>
+    </div>
+  </div>
+  <div class="circle-btn" (click)="showDetailFuncAdditiveNoise()">View Further Details</div>
+</div>
+
+<div class="innerpage-row-col row-col-right" *ngIf="showDetailTableAdditiveNoise">
+  <div class="row-col-matrix-content">
+    <div class="col-right-table-wrap">
+      <div class="col-right-table-header">% of Examples Correctly Classified for each Class</div>
+      <div class="detailExample-wrap">
+        <div class="detailExample-cont" *ngFor="let rec of filterClassMatricsData_Obj_AdditiveNoise">
+          <div class="detailExample-cont-className" (click)="selectedClassItems_AdditiveNoise($event); addtivenoiseClassClick()">{{rec.className}}</div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.originalExample}} small green">
+              <span>{{ rec.originalExample }}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Original</div>
+          </div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.adversarialExample}} small {{ rec.diffRecall }}">
+              <span>{{rec.adversarialExample}}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Additive Noise</div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="innerpage-row-col row-col-mid" *ngIf="showDetailTableAdditiveNoise">
+  <div class="slider-txt-display" *ngIf="additivenoiseshowPara">
+    <p>Click on Class Name to view the Example of each Class</p>
+  </div>
+  <div class="slider-wrap" *ngIf="additivenoiseshowSlider">
+    <div class="carousel-wrapper">
+    <swiper  [config]="config" [(index)]="index5" [disabled]="disabled"
+    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+    <div *ngFor="let item of objectRecAdditiveNoiseImages" class="swiper-slide">
+    <div >
+    <div class="item">
+    <div class="item-inside item-inside-01">
+    <p>Original Image Classified as - {{item.orgName}}</p>
+    <img src="./assets/results/Generalization/Object_Recognition/Results/Noisy/{{item.className}}/original/{{item.image}}">
+    </div>
+    <div class="col-mid-img-cont-wrap col-mid-mid">
+    <i class="fa fa-long-arrow-right"></i>
+    </div>
+    <div class="item-inside item-inside-02">
+    <p>Original Image Classified as - {{item.perName}}</p>
+    <img src="./assets/results/Generalization/Object_Recognition/Results/Noisy/{{item.className}}/perturbed/{{item.image}}">
+    </div>
+    </div>
+    </div>
+    </div>
+    </swiper>
+    </div>
+
+  </div>
+  <div class="details-back-btn" (click)="showInitialFuncAdditiveNoise()">View Overall Metrics.</div>
+</div>
+
+<div class="clearfix"></div>
+</div>
+
+<div class="innerpage-row innerpage-row-06">
+
+<div class="innerpage-row-col row-col-left">
+  <div class="row-col-header">
+    <span>Eidolon Noise</span>
+    <a><i (click)="adversarialSetting = !adversarialSetting; settingMethod($event)" id="ens" class="fa fa-cogs"></i></a>
+  </div>
+  <div class="row-col-content">
+    This test checks whether the classifier is invariant to noise which creates a form of deformation (Eidolon) that is not a problem for human vision.
+  </div>
+</div>
+
+<div class="innerpage-row-col row-col-initial" *ngIf="showInitialTableEidolonNoise">
+  <div class="row-col-initial-header">% of Examples Classified by the Model Correctly</div>
+  <div class="clearfix"></div>
+
+  <div class="initial-circle-wrap" *ngFor="let rec of overallObjRecEidolonNoiseData">
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsOriginalPrecision }} green">
+        <span>{{ rec.overallMatricsOriginalPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Original</div>
+    </div>
+
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsPrecision }} {{ rec.overallMatricsDiff }}">
+        <span>{{ rec.overallMatricsPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Eidolon Noise</div>
+    </div>
+  </div>
+  <div class="circle-btn" (click)="showDetailFuncEidolonNoise()">View Further Details</div>
+</div>
+
+<div class="innerpage-row-col row-col-right" *ngIf="showDetailTableEidolonNoise">
+  <div class="row-col-matrix-content">
+    <div class="col-right-table-wrap">
+      <div class="col-right-table-header">% of Examples Correctly Classified for each Class</div>
+      <div class="detailExample-wrap">
+        <div class="detailExample-cont" *ngFor="let rec of filterClassMatricsData_Obj_EidolonNoise">
+          <div class="detailExample-cont-className" (click)="selectedClassItems_EidolonNoise($event); eidolonnoiseClassClick()">{{rec.className}}</div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.originalExample}} small green">
+              <span>{{ rec.originalExample }}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Original</div>
+          </div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.adversarialExample}} small {{ rec.diffRecall }}">
+              <span>{{rec.adversarialExample}}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Eidolon Noise</div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="innerpage-row-col row-col-mid" *ngIf="showDetailTableEidolonNoise">
+  <div class="slider-txt-display" *ngIf="eidolonnoiseshowPara">
+    <p>Click on Class Name to view the Example of each Class</p>
+  </div>
+  <div class="slider-wrap" *ngIf="eidolonnoiseshowSlider">
+    <div class="carousel-wrapper">
+    <swiper  [config]="config" [(index)]="index6" [disabled]="disabled"
+    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+    <div *ngFor="let item of objectRecEidolonNoiseImages" class="swiper-slide">
+    <div >
+    <div class="item">
+    <div class="item-inside item-inside-01">
+    <p>Original Image Classified as - {{item.orgName}}</p>
+    <img src="./assets/results/Generalization/Object_Recognition/Results/Eidolon/{{item.className}}/original/{{item.image}}">
+    </div>
+    <div class="col-mid-img-cont-wrap col-mid-mid">
+    <i class="fa fa-long-arrow-right"></i>
+    </div>
+    <div class="item-inside item-inside-02">
+    <p>Original Image Classified as - {{item.perName}}</p>
+    <img src="./assets/results/Generalization/Object_Recognition/Results/Eidolon/{{item.className}}/perturbed/{{item.image}}">
+    </div>
+    </div>
+    </div>
+    </div>
+    </swiper>
+    </div>
+
+  </div>
+  <div class="details-back-btn" (click)="showInitialFuncEidolonNoise()">View Overall Metrics.</div>
+</div>
+
+<div class="clearfix"></div>
+</div>
+
+<!-- <div class="innerpage-row innerpage-row-07">
+
+<div class="innerpage-row-col row-col-left">
+  <div class="row-col-header">
+    <span>Model Complexity</span>
+    <a><i (click)="adversarialSetting = !adversarialSetting; settingMethod($event)" id="mcs" class="fa fa-cogs"></i></a>
+  </div>
+  <div class="row-col-content">
+    This test checks whether the model is susceptible to overfitting or underfitting.
+  </div>
+</div>
+
+<div class="innerpage-row-col row-col-initial" *ngIf="showInitialTableModelComplexity">
+  <div class="row-col-initial-header">% of Examples Classified by the Model Correctly</div>
+  <div class="clearfix"></div>
+
+  <div class="initial-circle-wrap" *ngFor="let rec of overallObjRecModelComplexityData">
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsOriginalPrecision }} green">
+        <span>{{ rec.overallMatricsOriginalPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Original</div>
+    </div>
+
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsPrecision }} {{ rec.overallMatricsDiff }}">
+        <span>{{ rec.overallMatricsPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Model Complexity</div>
+    </div>
+  </div>
+  <div class="circle-btn" (click)="showDetailFuncModelComplexity()">View Further Details</div>
+</div>
+
+<div class="innerpage-row-col row-col-right" *ngIf="showDetailTableModelComplexity">
+  <div class="row-col-matrix-content">
+    <div class="col-right-table-wrap">
+      <div class="col-right-table-header">% of Examples Correctly Classified for each Class Model</div>
+      <div class="detailExample-wrap">
+        <div class="detailExample-cont" *ngFor="let rec of filterClassMatricsData_Obj_ModelComplexity">
+          <div class="detailExample-cont-className" (click)="selectedClassItems_ModelComplexity($event); modelcomplexityClassClick()">{{rec.className}}</div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.originalExample}} small green">
+              <span>{{ rec.originalExample }}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Original</div>
+          </div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.adversarialExample}} small {{ rec.diffRecall }}">
+              <span>{{rec.adversarialExample}}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Model Complexity</div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="innerpage-row-col row-col-mid" *ngIf="showDetailTableModelComplexity">
+  <div class="slider-txt-display" *ngIf="modelcomplexityshowPara">
+    <p>Click on Class Name to view the Example of each Class</p>
+  </div>
+  <div class="slider-wrap" *ngIf="modelcomplexityshowSlider">
+
+	<div class="carousel-wrapper">
+    <swiper  [config]="config" [(index)]="index7" [disabled]="disabled"
+    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+    <div *ngFor="let item of objectRecModelComplexityImages" class="swiper-slide">
+    <div >
+    <div class="item">
+    <div class="item-inside item-inside-01">
+    <p>Original Image Classified as - {{item.orgName}}</p>
+    <img src="./assets/results/Generalization/ModelComplexity/Results/{{item.className}}/original/{{item.image}}">
+    </div>
+    <div class="col-mid-img-cont-wrap col-mid-mid">
+    <i class="fa fa-long-arrow-right"></i>
+    </div>
+    <div class="item-inside item-inside-02">
+    <p>Original Image Classified as - {{item.perName}}</p>
+    <img src="./assets/results/Generalization/ModelComplexity/Results/{{item.className}}/perturbed/{{item.image}}">
+    </div>
+    </div>
+    </div>
+    </div>
+    </swiper>
+    </div>
+  </div>
+  <div class="details-back-btn" (click)="showInitialFuncModelComplexity()">View Overall Metrics.</div>
+</div>
+
+<div class="clearfix"></div>
+</div> -->
+
+
+</div>
+
+</mat-tab>
+
+<mat-tab label="Robustness">
+<div class="innerpage-wrap">
+ <div class="innerpage-row innerpage-row-08">
+
+<div class="innerpage-row-col row-col-left">
+  <div class="row-col-header">
+    <span>Adversarial Inputs</span>
+    <a><i (click)="adversarialSetting = !adversarialSetting; settingMethod($event)" id="ais" class="fa fa-cogs"></i></a>
+  </div>
+  <div class="row-col-content">
+    This test checks Model Inputs on adversarial inputs (i.e. those that may not occur naturally but can be mis-used by a malicious party).
+  </div>
+</div>
+
+<div class="innerpage-row-col row-col-initial" *ngIf="showInitialTableAdversarialInputs">
+  <div class="row-col-initial-header">% of Examples Classified by the Model Correctly</div>
+  <div class="clearfix"></div>
+
+  <div class="initial-circle-wrap" *ngFor="let rec of overallAdversarialData">
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsOriginalPrecision }} green">
+        <span>{{ rec.overallMatricsOriginalPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Original</div>
+    </div>
+
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsPrecision }} {{ rec.overallMatricsDiff }}">
+        <span>{{ rec.overallMatricsPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Adversarial Inputs</div>
+    </div>
+  </div>
+  <div class="circle-btn" (click)="showDetailFuncAdversarialInputs()">View Further Details</div>
+</div>
+
+<div class="innerpage-row-col row-col-right" *ngIf="showDetailTableAdversarialInputs">
+  <div class="row-col-matrix-content">
+    <div class="col-right-table-wrap">
+      <div class="col-right-table-header">% of Examples Correctly Classified for each Class</div>
+      <div class="detailExample-wrap">
+        <div class="detailExample-cont" *ngFor="let rec of filterClassMatricsData_Adv">
+          <div class="detailExample-cont-className" (click)="selectedClassItems_AdversarialInputs($event); adversarialInputsClassClick()">{{rec.className}}</div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.originalExample}} small green">
+              <span>{{ rec.originalExample }}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Original</div>
+          </div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.adversarialExample}} small {{ rec.diffRecall }}">
+              <span>{{rec.adversarialExample}}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Adversarial Inputs</div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="innerpage-row-col row-col-mid" *ngIf="showDetailTableAdversarialInputs">
+  <div class="slider-txt-display" *ngIf="adversarialInputsshowPara">
+    <p>Click on Class Name to view the Example of each Class</p>
+  </div>
+  <div class="slider-wrap" *ngIf="adversarialInputsshowSlider">
+   <div class="carousel-wrapper">
+    <swiper  [config]="config" [(index)]="index8" [disabled]="disabled"
+    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+    <div *ngFor="let item of advImages" class="swiper-slide">
+    <div >
+    <div class="item">
+    <div class="item-inside item-inside-01">
+    <p>Original Image Classified as - {{item.orgName}}</p>
+    <img src="./assets/results/Robustness/AdversarialInputs/Results/{{item.className}}/original/{{item.image}}">
+    </div>
+    <div class="col-mid-img-cont-wrap col-mid-mid">
+    <i class="fa fa-long-arrow-right"></i>
+    </div>
+    <div class="item-inside item-inside-02">
+    <p>Original Image Classified as - {{item.perName}}</p>
+    <img src="./assets/results/Robustness/AdversarialInputs/Results/{{item.className}}/perturbed/{{item.image}}">
+    </div>
+    </div>
+    </div>
+    </div>
+    </swiper>
+    </div>
+  </div>
+  <div class="details-back-btn" (click)="showInitialFuncAdversarialInputs()">View Overall Metrics.</div>
+</div>
+
+<div class="clearfix"></div>
+</div>
+
+<!--
+<div class="innerpage-row innerpage-row-09">
+<div class="innerpage-row-col row-col-left">
+  <div class="row-col-header">
+    <span>Adversarial Patches</span>
+    <a><i (click)="adversarialSetting = !adversarialSetting; settingMethod($event)" id="aps" class="fa fa-cogs"></i></a>
+  </div>
+  <div class="row-col-content">
+    This tests the impact of the classifier when a specially crafted adversarial patch is introduced.
+  </div>
+</div>
+
+<div class="innerpage-row-col row-col-initial" *ngIf="showInitialTableAdversarialPatches">
+  <div class="row-col-initial-header">% of Examples Classified by the Model Correctly</div>
+  <div class="clearfix"></div>
+
+  <div class="initial-circle-wrap" *ngFor="let rec of overallAdversarialPatchesData">
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsOriginalPrecision }} green">
+        <span>{{ rec.overallMatricsOriginalPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Original</div>
+    </div>
+
+    <div class="initial-circle-content">
+      <div class="c100 p{{ rec.overallMatricsPrecision }} {{ rec.overallMatricsDiff }}">
+        <span>{{ rec.overallMatricsPrecision }}%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <div class="circle-header">On Adversarial Patches</div>
+    </div>
+  </div>
+  <div class="circle-btn" (click)="showDetailFuncAdversarialPatches()">View Further Details</div>
+</div>
+
+<div class="innerpage-row-col row-col-right" *ngIf="showDetailTableAdversarialPatches">
+  <div class="row-col-matrix-content">
+    <div class="col-right-table-wrap">
+      <div class="col-right-table-header">% of Examples Correctly Classified for each Class</div>
+      <div class="detailExample-wrap">
+        <div class="detailExample-cont" *ngFor="let rec of filterClassMatricsData_AdversarialPatches">
+          <div class="detailExample-cont-className" (click)="selectedClassItems_AdversarialPatches($event); adversarialpatchesClassClick()">{{rec.className}}</div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.originalExample}} small green">
+              <span>{{ rec.originalExample }}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Original</div>
+          </div>
+          <div class="detailExample-cont-circle">
+            <div class="c100 p{{rec.adversarialExample}} small {{ rec.diffRecall }}">
+              <span>{{rec.adversarialExample}}%</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+            <div class="detailExample-cont-header">On Adversarial Patches</div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="innerpage-row-col row-col-mid" *ngIf="showDetailTableAdversarialPatches">
+  <div class="slider-txt-display" *ngIf="adversarialpatchesshowPara">
+    <p>Click on Class Name to view the Example of each Class</p>
+  </div>
+  <div class="slider-wrap" *ngIf="adversarialpatchesshowSlider">
+
+  <div class="carousel-wrapper">
+    <swiper  [config]="config" [(index)]="index9" [disabled]="disabled"
+    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+    <div *ngFor="let item of adversarialPatchesImages" class="swiper-slide">
+    <div >
+    <div class="item">
+    <div class="item-inside item-inside-01">
+    <p>Original Image Classified as - {{item.orgName}}</p>
+    <img src="./assets/results/Robustness/AdversarialInputs/Results/{{item.className}}/original/{{item.image}}">
+    </div>
+    <div class="col-mid-img-cont-wrap col-mid-mid">
+    <i class="fa fa-long-arrow-right"></i>
+    </div>
+    <div class="item-inside item-inside-02">
+    <p>Original Image Classified as - {{item.perName}}</p>
+    <img src="./assets/results/Robustness/AdversarialInputs/Results/{{item.className}}/perturbed/{{item.image}}">
+    </div>
+    </div>
+    </div>
+    </div>
+    </swiper>
+    </div>
+  </div>
+  <div class="details-back-btn" (click)="showInitialFuncAdversarialPatches()">View Overall Metrics.</div>
+</div>
+
+<div class="clearfix"></div>
+</div> -->
+
+
+</div>
+</mat-tab>
+<!-- <mat-tab label="Discrimination">
+
+<div class="container">
+
+</div>
+
+</mat-tab> -->
+
+<mat-tab label="Interpretability">
+<div class="innerpage-wrap">
+<div class="ip-row">
+
+<div class="ip-filter-wrap">
+  <div><button [ngClass]="{'active': activateAll}" (click)="myMethod($event)" id="overall" name="overall">Show All</button></div>
+  <div><button [ngClass]="{'active': activateMisclassified}" (click)="myMethod($event)" id="wrongly_classified" name="wrongly classified">Misclassified classes with high probability</button></div>
+  <div><button [ngClass]="{'active': activateClassified}" (click)="myMethod($event)" id="Correctly_classified" name="Correctly classified">Correctly Classified classes with low probability</button></div>
+  <div><button [ngClass]="{'active': activateCorrectHighProbablity}" (click)="myMethod($event)" id="Correctly_classified_High_Probablity" name="Correctly classified">Classified with high probability</button></div>
+</div>
+
+<!-- <div class="ip-header">Results</div> -->
+<div class="ip-setting-btn-wrap" (click)="interpretabilitySetting = !interpretabilitySetting"><i class="fa fa-cogs"></i></div>
+<div class="clearfix"></div>
+
+<div class="lime-setting-probablitychange-wrap">
+  <form name="pform" #pf="ngForm" novalidate (ngSubmit)="onpSubmit()">
+  <div class="lspcw-01">Showing Results with experiments ran with 0.5 probability. </div>
+  <div class="lspcw-02">Please change probablity and submit to view results <input name="probablityValue" [(ngModel)]="pmodel.probablityValue" #probablityValue="ngModel">  <button>Submit</button></div>
+  </form>
+  <div class="clearfix"></div>
+</div>
+</div>
+
+
+<div class="list emptylist" *ngIf="blankFlag">No Images to be displayed</div>
+
+<div class="list" *ngIf="!blankFlag">
+		<ul>
+			<li *ngFor="let glRec of limeCsvData | paginate: { itemsPerPage: 10, currentPage: p }">
+          <div class="ip-result-wrap">
+            <!-- <div class="limeResult-followup-wrap form-group">
+              <div class="comment-icon-wrap"><i class="fa fa-comments-o"></i></div>
+              <label class="checkbox_wrap">
+                <input type="checkbox" name="followUpLime" [(ngModel)]="model.followUpLimeValue" #followUpLimeValue="ngModel" (click)="followUpSelect($event)">
+                <span class="checkmark"></span>
+              </label>
+            </div> -->
+              <div class="ip-result-col-left">
+                <span>Original</span>
+                <div class="ip-result-col-left-01">
+                  <img src="./assets/results/Interpretability/Results/{{ glRec.limeOriginalClassName }}/{{ glRec.limeImgFolder }}/{{ glRec.limeOriginalImage }}">
+                  <p>Class - {{ glRec.limeOriginalClassName }}</p>
+                </div>
+              </div>
+
+              <div class="ip-result-col-right">
+                <span>Explaining an Original Image on Top 2 Prediction </span>
+                <div class="ip-result-col-right-01" *ngFor="let rec of glRec.predictions; let myIndex=index">
+                  <img src="./assets/results/Interpretability/Results/{{ glRec.limeOriginalClassName }}/{{ glRec.limeImgFolder }}/{{glRec.explaination[myIndex]}}">
+                  <p>Explaining {{ glRec.predictions[myIndex] }} ({{ glRec.probablity[myIndex] }})</p>
+                </div>
+              </div>
+
+              <div class="ip-result-col-right-alt">
+                <span>Images from Imagenet </span>
+                <div class="ip-result-col-right-alt-01">
+                  <!-- <main>
+                    <div class="showcase">
+                    <div  class="content horizontal-images" light malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+              				<img src="assets/results/Interpretability/Results/imagenet/rural_081.JPEG" />
+                      <img src="assets/results/Interpretability/Results/imagenet/rural_081.JPEG" />
+                      <img src="assets/results/Interpretability/Results/imagenet/rural_081.JPEG" />
+              			</div>
+                    <p>Explaining Images</p>
+                  </div>
+                </main> -->
+                </div>
+
+                <div class="ip-result-col-right-alt-02">
+                  <!-- <main>
+                    <div class="showcase">
+                    <div  class="content horizontal-images" light malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+              				<img src="assets/results/Interpretability/Results/imagenet/rural_081.JPEG" />
+              			</div>
+                    <p>Explaining Images</p>
+                  </div>
+                </main> -->
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <!-- <div class="google-search-wrap">
+                <a href="h<img src="assets/results/Interpretability/Results/imagenet/img2.jpg" />
+                <img src="assets/results/Interpretability/Results/imagenet/img2.jpg" />
+                <img src="assets/results/Interpretability/Results/imagenet/img2.jpg" />
+                <img src="assets/results/Interpretability/Results/imagenet/img2.jpg" />
+                <img src="assets/results/Interpretability/Results/imagenet/img2.jpg" />
+                <img src="assets/results/Interpretability/Results/imagenet/img2.jpg" />
+                <img src="assets/results/Interpretability/Results/imagenet/img2.jpg" />ttps://www.google.com/search?tbm=isch&q={{ glRec.classNameToSearch }}" target="_blank">Search why {{ glRec.classNameToSearch }} misclassified as {{glRec.firstPrediction}} in Google</a>
+              </div> -->
+              <!-- <div class="commentbox-wrap" >
+                <span>Comments</span>
+                <form name="cform" #cf="ngForm" novalidate (ngSubmit)="oncSubmit()">
+                <textarea name="comment"></textarea>
+                <div class="comment-submit-wrap"><button>Submit</button></div>
+                </form>
+              </div> -->
+              <div class="clearfix"></div>
+          </div>
+      </li>
+		</ul>
+
+		<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<!--<div class="ip-row">
+ <div class="ip-result-wrap" *ngFor="let glRec of limeCsvData">
+  <div class="ip-result-col-left">
+    <span>Original</span>
+    <div class="ip-result-col-left-01">
+      <img src="./assets/results/Interpretability/Results/{{ glRec.limeOriginalClassName }}/{{ glRec.limeImgFolder }}/{{ glRec.limeOriginalImage }}">
+      <p>Class - {{ glRec.limeOriginalClassName }}</p>
+    </div>
+  </div>
+
+  <div class="ip-result-col-right">
+    <span>Explaining an Original Image on Top 3 Prediction </span>
+    <div class="ip-result-col-right-01" *ngFor="let rec of glRec.explaination; let myIndex=index">
+      <img src="./assets/results/Interpretability/Results/{{ glRec.limeOriginalClassName }}/{{ glRec.limeImgFolder }}/{{glRec.explaination[myIndex]}}">
+      <p>Explaining {{ glRec.predictions[myIndex] }} ({{ glRec.probablity[myIndex] }})</p>
+    </div>
+
+  </div>
+  <div class="clearfix"></div>
+</div>
+</div>-->
+
+</div>
+
+</mat-tab>
+
+</mat-tab-group>
+
+
+</div>
+
+</mat-drawer-container>
+
+</div>
+
+<!-- <app-image-classifier-main-settings [(visible)]="showMainSetting" (imageClassifierSettingsValue)="imageClassifierSettingsValue($event)"></app-image-classifier-main-settings> -->
+<app-adversarial-inputs-settings [(visible)]="adversarialSetting" (adversarialSettingsValue)="adversarialSettingsValue($event)"></app-adversarial-inputs-settings>
+<app-interpretability-settings [(visible)]="interpretabilitySetting" (interpretabilitySettingsValue)="interpretabilitySettingsValue($event)"></app-interpretability-settings>

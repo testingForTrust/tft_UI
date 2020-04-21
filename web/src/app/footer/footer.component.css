@@ -1,0 +1,24 @@
+footer{
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  padding: 10px 5px;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+.footer-left{
+  float: left;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.footer-right{
+  float: right;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+}

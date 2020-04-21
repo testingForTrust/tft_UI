@@ -1,0 +1,459 @@
+/*Stylesheet for VERML*/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Roboto:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900');
+/*@import url("../vendors/font-awesome/css/font-awesome.css");*/
+
+/*font-family: 'Roboto', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Rubik', sans-serif;*/
+
+@import url("src/assets/vendors/font-awesome/css/font-awesome.min.css");
+@import url("src/assets/css/circle.css");
+@import url("src/assets/css/swiper.min.css");
+
+
+
+*{
+  box-sizing: border-box;
+}
+
+/* html{
+  overflow: hidden;
+  height: 100%;
+} */
+
+/*Remove on Focus*/
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus, a:focus {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+body{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+  /* overflow-x: hidden; */
+}
+
+
+
+.clearfix{
+  clear: both;
+}
+
+.main-wrap{
+
+}
+
+.full-width-wrap{
+
+}
+
+.fixed-width-wrap{
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+/* Side Nav Styles */
+
+.mat-expansion-panel-content .mat-expansion-panel-body{
+  padding: 0px 10px 0px 10px;
+}
+
+
+.mat-button-focus-overlay{
+  display: none;
+}
+
+.cdk-overlay-container{
+  position: fixed;
+  z-index: 1000;
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container{
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.cdk-overlay-backdrop{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.cdk-overlay-dark-backdrop{
+  background: rgba(0,0,0,.288);
+}
+
+.cdk-global-overlay-wrapper{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+}
+
+.cdk-overlay-pane{
+  position: absolute;
+  pointer-events: auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.cdk-visually-hidden{
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  outline: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.mat-dialog-container{
+  box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+  display: block;
+  padding: 20px;
+  border-radius: 2px;
+  box-sizing: border-box;
+  overflow: auto;
+  overflow-x: hidden !important;
+  outline: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.full-width-wrap{
+  width: 100%;
+}
+
+.mat-dialog-title{
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.mat-dialog-content{
+  font-weight: 400;
+  font-size: 16px;
+
+}
+
+.mat-dialog-actions{
+
+}
+
+.cdk-overlay-pane{
+
+}
+
+.mat-tab-list .mat-tab-label{
+  padding: 0px 10px 20px 10px;
+  /* height: 20px; */
+  min-width: 0px;
+  /* text-align: left; */
+  /* justify-content: flex-start; */
+}
+
+.mat-tab-list .mat-tab-label:first-child{
+    /* width: 60px; */
+}
+
+.mat-tab-list .mat-tab-label:last-child{
+    /* width: 80px; */
+}
+
+.mat-tab-body{
+  min-height: 200px;
+  margin: 30px 0px 0px 0px;
+  padding: 0px 10px;
+}
+
+.mat-tab-body-content{
+  overflow: hidden !important;
+}
+
+.mat-tab-label .mat-tab-label-content{
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+}
+
+.mat-tab-label-active{
+  border-bottom: #ff3366 solid 1px;
+}
+
+.mat-dialog-actions{
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  z-index: 99;
+}
+
+.mat-dialog-actions .mat-button{
+  min-width: 0px;
+  background: transparent;
+  line-height: 0;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+}
+
+.mat-button i{
+font-family: 'FontAwesome';
+font-size: 14px;
+}
+
+.mat-input-element{
+  border: rgb(255, 255, 255) solid 1px;
+}
+
+.mat-drawer-container .mat-tab-list .mat-tab-label{
+  padding: 20px 10px;
+  height: 20px;
+  min-width: 0px;
+  /* text-align: left; */
+  /* justify-content: flex-start; */
+}
+
+.mat-tab-group{
+  border-left: rgba(20, 157, 204, 0.98) solid 1px;
+  min-height: 100vh;
+  /* height: 100vh;
+  overflow-y: scroll; */
+}
+
+.mat-drawer{
+  overflow-y: visible !important;
+}
+
+.mat-drawer-container .mat-tab-list .mat-tab-label:first-child, .mat-drawer-container .mat-tab-list .mat-tab-label:last-child, .mat-drawer-container .mat-tab-list .mat-tab-label{
+    width: 33.33%;
+    text-align: center;
+    padding: 10px 0px 30px 0px;
+}
+
+
+
+.mat-drawer-container .mat-tab-body{
+  min-height: 200px;
+  margin: 30px 0px 0px 0px;
+  padding: 0px 10px;
+}
+
+.mat-drawer-container .mat-tab-body-content{
+  overflow: hidden !important;
+}
+
+.mat-drawer-container .mat-tab-label .mat-tab-label-content{
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+
+}
+
+.mat-drawer-container .mat-tab-label {
+  border: rgba(255, 255, 255, 0.98) solid 1px;
+  border-bottom: rgba(20, 157, 204, 0.98) solid 1px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* .mat-drawer-container .mat-tab-label:first-child {
+  border-bottom: rgba(20, 157, 204, 0.98) solid 1px;
+} */
+
+.mat-drawer-container .mat-tab-label-active{
+  border: rgba(20, 157, 204, 0.98) solid 1px;
+  border-bottom: rgba(255, 255, 255, 0.98) solid 1px;
+  /* border-bottom: none; */
+
+}
+
+.mat-drawer-container .mat-tab-label-active .mat-tab-label-content{
+  color: rgba(20, 157, 204, 0.98);
+}
+
+.mat-drawer-container .mat-tab-header{
+    margin: 5px 0px 0px 0px;
+}
+
+.insidepage-container .mat-drawer-content{
+  overflow: hidden;
+}
+
+.mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination{
+  display: none !important;
+}
+
+
+div.burger {
+	height: 30px;
+	width: 40px;
+	position: absolute;
+	top: 6px;
+	left: 5px;
+	cursor: pointer;
+}
+	div.x,
+	div.y,
+	div.z {
+		position: absolute; margin: auto;
+		top: 0px; bottom: 0px;
+		background: rgba(0, 0, 0, 0.96);
+		border-radius:2px;
+		-webkit-transition: all 200ms ease-out;
+		   -moz-transition: all 200ms ease-out;
+		    -ms-transition: all 200ms ease-out;
+		     -o-transition: all 200ms ease-out;
+		        transition: all 200ms ease-out;
+	}
+	div.x, div.y, div.z {
+		height: 3px;
+		width: 26px;
+		-webkit-transition: all 100ms ease-out;
+		   -moz-transition: all 100ms ease-out;
+		    -ms-transition: all 100ms ease-out;
+		     -o-transition: all 100ms ease-out;
+		        transition: all 100ms ease-out;
+    }
+	div.y.squize{
+		width:0;
+		-webkit-transition: all 100ms ease-out;
+		   -moz-transition: all 100ms ease-out;
+		    -ms-transition: all 100ms ease-out;
+		     -o-transition: all 100ms ease-out;
+		        transition: all 100ms ease-out;
+	}
+	div.y{top: 18px;}
+	div.z{top: 37px;}
+
+	div.open div.x, div.open div.z{
+		top:19px;
+		-webkit-transition: all 70ms ease-out;
+		   -moz-transition: all 70ms ease-out;
+		    -ms-transition: all 70ms ease-out;
+		     -o-transition: all 70ms ease-out;
+		        transition: all 70ms ease-out;
+	}
+
+	div.rotate30{
+		-ms-transform: rotate(30deg);
+    	-webkit-transform: rotate(30deg);
+	    transform: rotate(30deg);
+		-webkit-transition: all 70ms ease-out;
+		   -moz-transition: all 70ms ease-out;
+		    -ms-transition: all 70ms ease-out;
+		     -o-transition: all 70ms ease-out;
+		        transition: all 70ms ease-out;
+	}
+	div.rotate150{
+		-ms-transform: rotate(150deg);
+    	-webkit-transform: rotate(150deg);
+	    transform: rotate(150deg);
+		-webkit-transition: all 70ms ease-out;
+		   -moz-transition: all 70ms ease-out;
+		    -ms-transition: all 70ms ease-out;
+		     -o-transition: all 70ms ease-out;
+		        transition: all 70ms ease-out;
+	}
+
+	div.rotate45{
+		-ms-transform: rotate(45deg);
+    	-webkit-transform: rotate(45deg);
+	    transform: rotate(45deg);
+		-webkit-transition: all 100ms ease-out;
+		   -moz-transition: all 100ms ease-out;
+		    -ms-transition: all 100ms ease-out;
+		     -o-transition: all 100ms ease-out;
+		        transition: all 100ms ease-out;
+	}
+	div.rotate135{
+		-ms-transform: rotate(135deg);
+    	-webkit-transform: rotate(135deg);
+	    transform: rotate(135deg);
+		-webkit-transition: all 100ms ease-out;
+		   -moz-transition: all 100ms ease-out;
+		    -ms-transition: all 100ms ease-out;
+		     -o-transition: all 100ms ease-out;
+		        transition: all 100ms ease-out;
+	}
+
+
+  swiper .swiper.s-wrapper .swiper-wrapper .swiper-slide{
+    overflow: visible !important;
+  }
+
+  .swiper-button-next, .swiper-button-prev{
+    position: relative !important;
+    color: rgb(0, 0, 0) !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    font-size: 12px;
+    width: auto !important;
+    background: none !important;
+    height: auto !important;
+  }
+
+  .swiper-button-prev{
+    float: left;
+
+  }
+
+  .swiper-button-prev:before{
+    font-family: 'FontAwesome';
+    content: '\f053';
+    font-size: 18px;
+  }
+
+  .swiper-button-prev:after{
+    content: ' Previous';
+    position: absolute;
+    left:15px;
+    top: 3px;
+  }
+
+  .swiper-button-next{
+    float: right;
+  }
+
+  .swiper-button-next:before{
+    content: 'Next ';
+    position: absolute;
+    left:-30px;
+    top: 3px;
+  }
+
+  .swiper-button-next:after{
+    font-family: 'FontAwesome';
+    content: '\f054';
+    font-size: 18px;
+  }
+
+  .ngx-pagination{
+    width: 100%;
+    text-align: center;
+  }
+
+  .mCSB_horizontal.mCSB_inside .mCSB_container{
+    margin: 0px 0px 15px 0px !important;
+  }

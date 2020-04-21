@@ -1,0 +1,110 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.login-bg{
+  background: url("../../assets/images/homepage-images/login_bg.jpg") #000000  no-repeat center center;
+  background-size: cover;
+  font-family: 'Rubik', sans-serif;
+  color: rgba(0,0,0,.87);
+  position:relative;
+}
+
+.dialog {
+  z-index: 1000;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin: -165px 0px 0px -175px;
+  /* min-height: 200px; */
+  /* width: 90%; */
+  min-width: 350px;
+  padding: 10px;
+  box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* @media (min-width: 768px) {
+  .dialog {
+    top: 40px;
+  }
+} */
+
+.dialog__close-btn {
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, 0.95);
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1.2em;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.form-group{
+  min-height: 70px;
+}
+
+.useremail-wrap label, .userpassword-wrap label, .registername-wrap label, .registeremail-wrap label, .registerpassword-wrap label, .registerrepeatpassword-wrap label{
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  margin: 0px 0px 0px 0px;
+  display: block;
+}
+
+.useremail-wrap input, .userpassword-wrap input, .registername-wrap input, .registeremail-wrap input, .registerpassword-wrap input, .registerrepeatpassword-wrap input{
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  padding: 5px 0px;
+  border-bottom: rgb(255, 255, 255) solid 1px;
+}
+
+.form-horizontal{
+  width: 100%;
+  min-height: 240px;
+}
+
+.btn-login, .btn-register{
+  padding: 10px 0px;
+  width: 100%;
+  text-align: center;
+  background: #ff3366;
+  color: rgb(255, 255, 255);
+  border: none;
+  font-size: 14px;
+}
+
+.btn-login:disabled, .btn-register:disabled{
+  background: rgba(88, 88, 88, 0.74);
+}
+
+.btn-login{
+  margin: 80px 0px 20px 0px;
+}
+
+.btn-register{
+  margin: 20px 0px;
+}
+
+/* .ng-dirty.ng-invalid label{
+  color: rgba(186, 9, 6, 1);
+} */
+
+input.ng-dirty.ng-invalid{
+  border-bottom: rgba(186, 9, 6, 1) solid 1px;
+}
+
+.form-control-feedback p{
+  color: rgba(186, 9, 6, 1);
+  font-size: 14px;
+  padding: 5px 0px;
+}

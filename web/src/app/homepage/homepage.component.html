@@ -1,0 +1,96 @@
+<div id="fullpage">
+<div class="section section-01">
+<div class="fixed-width-wrap">
+<h1>Testing for Trust</h1>
+<p>Testing for Trust envisages testing black box ML models for robustness, discrimination and interpretability. Audits can be made on Image Classifiers, Classifiers on Structured data and classifiers on unstructured text data.</p>
+</div>
+</div>
+<div class="section section-02">
+<div class="fixed-width-wrap">
+<div class="media-container-row">
+<div class="card card-col card-01">
+<div class="card-img">
+<span class="icon-01"></span>
+</div>
+<div class="card-box">
+<span class="card-title">Audit image classifier models</span>
+<p class="card-text"></p>
+<!-- <div class="card-btn"><a class="" (click)="showDialog = !showDialog">Click</a></div> -->
+<div class="card-btn"><a class="" (click)="triggerclick()">Click</a></div>
+<!-- <div class="card-btn" (click)="triggerclick()" routerLink="/image-classifier">Click</div> -->
+</div>
+</div>
+<div class="card card-col card-02">
+<div class="card-img">
+<span class="icon-02"></span>
+</div>
+<div class="card-box">
+<span class="card-title">Audit predictive models on Structured data</span>
+<p class="card-text"></p>
+<div class="card-btn"><a class="" (click)="showDialog = !showDialog">Click</a></div>
+</div>
+</div>
+<div class="card card-col card-03">
+<div class="card-img">
+<span class="icon-03"></span>
+</div>
+<div class="card-box">
+<span class="card-title">Audit classifier models on Unstrcutured text data</span>
+<p class="card-text"></p>
+<div class="card-btn"><a class="" (click)="showDialog = !showDialog">Click</a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section section-03">
+<div class="fixed-width-wrap">
+<div class="media-container-row-alt">
+<span class="section-title">What does it mean?</span>
+<div class="media-container-row">
+<div class="section-03-cont-wrap">
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item"><a class="nav-link active" [ngClass]="{active: tab01}" (click)="showTabContent($event)">
+  Generalization</a></li>
+<li class="nav-item"><a class="nav-link" (click)="showTabContent($event)" [ngClass]="{active: tab02}">
+Robustness</a></li>
+<!-- <li class="nav-item"><a class="nav-link" (click)="showTabContent($event)" [ngClass]="{active: tab03}">
+Discrimination</a></li> -->
+<li class="nav-item"><a class="nav-link" (click)="showTabContent($event)" [ngClass]="{active: tab03}">
+Interpretability</a></li>
+</ul>
+<div class="tab-content">
+<div #tab01 class="tab-pane active show" role="tabpanel" *ngIf="tab01">
+<div class="tab-cont">
+<p>Measures the ability of the algorithm to perform well on new inputs not seen during training</p>
+</div>
+</div>
+<div #tab02 class="tab-pane" role="tabpanel" *ngIf="tab02">
+<div class="tab-cont">
+<p>Measures the ability of the algorithm to be not susceptible to maliciously crafted inputs to specifically fool the algorithm</p>
+</div>
+</div>
+<!-- <div #tab03 class="tab-pane" role="tabpanel" *ngIf="tab03">
+<div class="tab-cont">
+<p>Any distinction, exclusion or preference made on the basis of race, color, sex, religion, political opinion, national extraction or social origin, which has the effect of nullifying or impairing equality of opportunity or treatment.</p>
+</div>
+</div> -->
+<div #tab03 class="tab-pane" role="tabpanel" *ngIf="tab03">
+<div class="tab-cont">
+<p>Provides clue to interpret the decision of the algorithm</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- <app-login [(visible)]="showDialog"> </app-login> -->
+<!-- <app-header *ngIf="clickTrigger"></app-header> -->
