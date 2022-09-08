@@ -27,7 +27,7 @@
     "angular-material": "^1.1.9",
     "core-js": "^2.5.4",
     "file-saver": "^2.0.0-rc.4",
-    "jszip": "^3.1.5",
+    "jszip": "^3.7.0",
     "ngx-malihu-scrollbar": "^7.0.0",
     "ngx-pagination": "^3.2.1",
     "ngx-swiper-wrapper": "^7.1.1",
